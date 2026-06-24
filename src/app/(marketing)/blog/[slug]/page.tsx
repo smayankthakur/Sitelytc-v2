@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { ArrowLeft } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { ReadingProgress } from "@/components/fx/ReadingProgress";
 import { ButtonLink } from "@/components/ui/Button";
 import { getAllSlugs, getPost } from "@/lib/blog";
 import { site } from "@/lib/site";
@@ -98,6 +99,7 @@ export default async function BlogPostPage({
 
   return (
     <article>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

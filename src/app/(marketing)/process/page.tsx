@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { FaqAccordion, type Faq } from "@/components/process/FaqAccordion";
+import { ProcessScroller } from "@/components/process/ProcessScroller";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -93,42 +94,10 @@ export default function ProcessPage() {
         </Container>
       </section>
 
-      {/* Timeline */}
-      <section className="reveal py-16 sm:py-20">
+      {/* Pinned scroll-through */}
+      <section className="reveal py-16 sm:py-24">
         <Container>
-          <ol className="relative space-y-10 border-l-2 border-white/10 pl-8">
-            {phases.map((phase, i) => (
-              <li key={phase.name} className="relative">
-                <span className="absolute -left-[2.6rem] grid h-8 w-8 place-items-center rounded-full bg-brand-600 text-sm font-bold text-white ring-4 ring-white">
-                  {i + 1}
-                </span>
-                <div className="rounded-2xl border border-white/10 bg-surface p-6">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h2 className="text-xl font-semibold text-white">
-                      {phase.name}
-                    </h2>
-                    <span className="text-sm font-medium text-gold-300">
-                      {phase.duration}
-                    </span>
-                  </div>
-                  <ul className="mt-4 flex flex-wrap gap-2">
-                    {phase.deliverables.map((d) => (
-                      <li
-                        key={d}
-                        className="rounded-full bg-white/5 px-3 py-1 text-sm text-ink-200"
-                      >
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-4 text-sm text-ink-400">
-                    <span className="font-medium text-ink-200">Your involvement:</span>{" "}
-                    {phase.involvement}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <ProcessScroller phases={phases} />
         </Container>
       </section>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight, Cpu, ShieldCheck, Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { StatsBand } from "@/components/home/StatsBand";
 import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/lib/site";
 
@@ -72,6 +73,16 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
+
+      <StatsBand
+        title="A decade of precision, by the numbers."
+        stats={[
+          { value: 100, suffix: "+", label: "Projects delivered" },
+          { prefix: "\u20AC", value: 550, suffix: "k+", label: "Client revenue generated" },
+          { value: 650, suffix: "%", label: "Peak revenue growth" },
+          { static: "ISO 9001", label: "Certified quality management" },
+        ]}
+      />
 
       {/* Differentiators */}
       <section className="reveal py-16 sm:py-20">

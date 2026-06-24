@@ -90,21 +90,24 @@
     color: #1a1306;
   }
 
-  /* Dark custom scrollbar */
+  /* Skinny gold scrollbar (matches navbar accent) */
   * {
-    scrollbar-color: var(--color-ink-700) transparent;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gold-600) transparent;
   }
   *::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 7px;
+    height: 7px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
   }
   *::-webkit-scrollbar-thumb {
-    background: var(--color-ink-700);
+    background: linear-gradient(180deg, var(--color-gold-500), var(--color-gold-700));
     border-radius: 9999px;
-    border: 2px solid var(--color-canvas);
   }
   *::-webkit-scrollbar-thumb:hover {
-    background: var(--color-ink-600);
+    background: linear-gradient(180deg, var(--color-gold-400), var(--color-gold-600));
   }
 }
 
@@ -536,4 +539,27 @@ html.lenis body { height: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
   .route-transition { display: none; }
+}
+
+
+/* ── Spotlight card (cursor-follow gold glow) ── */
+.spotlight-glow {
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(239, 190, 82, 0.12), transparent 70%
+  );
+  opacity: 0; transition: opacity 0.35s ease;
+}
+.spotlight-card:hover .spotlight-glow { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-glow { display: none; }
+}
+
+
+/* ── Navbar glass fade-in (once on load) ── */
+@keyframes navbar-in { from { opacity: 0; } to { opacity: 1; } }
+.navbar-enter { animation: navbar-in 0.6s ease both; }
+@media (prefers-reduced-motion: reduce) {
+  .navbar-enter { animation: none; }
 }

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SpotlightCard } from "@/components/fx/SpotlightCard";
 import { ArrowRight, Code2, Bot, ShieldCheck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 
@@ -40,10 +40,10 @@ export function ServicePillars() {
 
       <div className="mt-14 grid gap-6 lg:grid-cols-3">
         {pillars.map((p) => (
-          <Link
+          <SpotlightCard
             key={p.title}
             href={p.href}
-            data-cursor="Explore"
+            cursor="Explore"
             className="group card-lift ring-glow flex flex-col rounded-2xl border border-white/10 bg-surface p-8 hover:border-gold-500/30"
           >
             <div className="flex items-center justify-between">
@@ -62,7 +62,7 @@ export function ServicePillars() {
               Learn more
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
-          </Link>
+          </SpotlightCard>
         ))}
       </div>
     </Section>
