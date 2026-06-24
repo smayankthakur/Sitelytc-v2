@@ -83,6 +83,10 @@ export function Footer() {
               />
             </Link>
             <p className="mt-5 text-sm leading-relaxed text-ink-300">
+              Premium digital media and software engineering firm specializing
+              in high-performance digital ecosystems and institutional growth.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-ink-400">
               {site.description}
             </p>
 

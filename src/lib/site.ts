@@ -27,11 +27,11 @@ export const socials = [
 
 export const nav = [
   { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
-  { label: "Cybersecurity", href: "/cybersecurity" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Kritvia", href: "/kritvia" },
   { label: "Process", href: "/process" },
-  { label: "About", href: "/about" },
+  { label: "Cybersecurity", href: "/cybersecurity" },
+  { label: "Kritvia", href: "/kritvia" },
+  { label: "Pricing", href: "/pricing" },
 ] as const;
