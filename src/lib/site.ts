@@ -10,10 +10,10 @@ export const site = {
   calendly:
     process.env.NEXT_PUBLIC_CALENDLY_URL ??
     "https://calendly.com/sitelytc/sitelytc-meet",
-  email: "hello@sitelytc.com",
-  phone: "+917291849403",
-  phoneDisplay: "+91 72918 49403",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "917291849403",
+  email: "sitelytc@gmail.com",
+  phone: "+918826849403",
+  phoneDisplay: "+91 88268 49403",
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "918826849403",
   location: "India — serving clients worldwide",
 } as const;
 
