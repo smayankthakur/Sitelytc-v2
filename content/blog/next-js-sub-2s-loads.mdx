@@ -1,0 +1,30 @@
+---
+title: "How We Hit Sub-2-Second Loads on Every Build"
+date: "2026-06-12"
+excerpt: "The exact Next.js rendering, caching, and image strategy we use to keep LCP under 2.5s without sacrificing rich design."
+author: "Mayank"
+tags: ["performance", "nextjs", "core-web-vitals"]
+readTime: "6 min read"
+---
+
+## Speed is a feature
+
+A site that loads in under two seconds converts better, ranks better, and feels more trustworthy. Here's the playbook we apply to every Next.js build.
+
+## Render on the server by default
+
+We build pages as React Server Components and only reach for `'use client'` when a component genuinely needs interactivity. Less JavaScript shipped means a faster Largest Contentful Paint.
+
+## Cache deliberately
+
+- **Static** for pages that rarely change (about, process).
+- **ISR** for pages with fresh-but-cacheable content (home at 60s, blog at 300s).
+- **Edge middleware** for per-request logic like the nonce-based CSP.
+
+## Images and fonts
+
+Every image goes through `next/image` with explicit dimensions to kill layout shift. Fonts load via `next/font` with `display: swap` and a subset, so there's no flash and no blocking request.
+
+## Measure, don't guess
+
+We hold every build to Lighthouse 95+ on performance and accessibility, LCP under 2.5s, and CLS under 0.1 — verified before launch, not hoped for.

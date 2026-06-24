@@ -1,0 +1,25 @@
+// Rename to schema.ts AFTER installing deps:  npm i drizzle-orm postgres
+// (or @neondatabase/serverless). Then run the migration steps in README.md.
+import { pgTable, text, timestamp, boolean, uuid } from "drizzle-orm/pg-core";
+
+export const users = pgTable("users", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  email: text("email").notNull().unique(),
+  name: text("name").notNull(),
+  org: text("org").notNull(),
+  role: text("role", { enum: ["client", "agency", "admin"] })
+    .notNull()
+    .default("client"),
+  // PBKDF2 string: v1$<iters>$<saltB64url>$<hashB64url> (see lib/users.ts)
+  passwordHash: text("password_hash").notNull(),
+  mfaEnabled: boolean("mfa_enabled").notNull().default(false),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+// Optional: server-side session table if you move off stateless cookies.
+export const sessions = pgTable("sessions", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});

@@ -1,0 +1,32 @@
+---
+title: "We Secured Our Own Site Before Yours: The Sitelytc Self-VAPT"
+date: "2026-06-05"
+excerpt: "Before we launched sitelytc.com, we ran the same VAPT we sell — here's every check and every fix, in the open."
+author: "Mayank"
+tags: ["cybersecurity", "vapt", "transparency"]
+readTime: "7 min read"
+---
+
+## Practising what we sell
+
+It would be a strange thing to sell security audits from an insecure website. So before sitelytc.com went live, we ran the exact VAPT package we offer clients — against ourselves.
+
+## Layer by layer
+
+We hardened the site in five layers, in order:
+
+1. **Cloudflare** — WAF with the OWASP Core Ruleset, L7 DDoS protection, and rate limiting on every public API route.
+2. **TLS & DNS** — TLS 1.3 minimum, HSTS with preload, DNSSEC, and CAA records.
+3. **Application headers** — a nonce-based Content-Security-Policy, plus HSTS, X-Frame-Options, and the rest.
+4. **API routes** — Zod validation, rate limiting, Turnstile CAPTCHA, and sanitisation on every endpoint.
+5. **Self-VAPT** — a full pass against the OWASP Top 10 and API Top 10.
+
+## What we found
+
+A handful of medium-severity misconfigurations — exactly the kind of thing that's invisible until someone looks. Each got the same treatment our clients receive: a CVSS score, the exact fix, and a re-test to confirm it was closed.
+
+> The point of an audit isn't the PDF. It's the fixes. We hold ourselves to that standard first.
+
+## See it for yourself
+
+Run our free security health check on your own site and compare. If anything needs fixing, you'll know exactly what — and we'll be happy to help.

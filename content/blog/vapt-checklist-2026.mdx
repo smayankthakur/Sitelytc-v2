@@ -1,0 +1,37 @@
+---
+title: "VAPT Checklist for Indian Startups in 2026"
+date: "2026-06-20"
+excerpt: "The 15-point VAPT checklist we run on every client site before launch — and why DPDPA 2023 makes it non-optional for Indian SaaS."
+author: "Mayank"
+tags: ["cybersecurity", "vapt", "india", "dpdpa"]
+readTime: "8 min read"
+---
+
+## Why this matters now
+
+Most websites ship with at least one exploitable vulnerability. For Indian SaaS handling personal data, DPDPA 2023 turns that from a technical risk into a compliance one. A VAPT pass before launch is the cheapest insurance you'll buy all year.
+
+## The 15-point checklist
+
+We run every client site through the same checklist. It maps to the OWASP Top 10 and the OWASP API Top 10, with a few additions for business-logic flaws.
+
+1. **Injection** — SQL, NoSQL, command, and template injection across every input.
+2. **Broken authentication** — session fixation, weak password policy, missing rate limits on login.
+3. **Sensitive data exposure** — TLS configuration, secrets in client bundles, verbose errors.
+4. **XML / XXE** — only where relevant, but still worth confirming.
+5. **Broken access control** — IDOR, missing function-level checks, privilege escalation.
+6. **Security misconfiguration** — default credentials, open admin panels, missing headers.
+7. **Cross-site scripting (XSS)** — reflected, stored, and DOM-based.
+8. **Insecure deserialization** — wherever untrusted input is deserialized.
+9. **Vulnerable dependencies** — known CVEs in your lockfile.
+10. **Insufficient logging** — can you even tell when you're attacked?
+
+> Every finding we report includes the exact line of code, a CVSS v3.1 score, and a step-by-step fix. Not a generic PDF.
+
+## What a good report looks like
+
+A report you can act on has three layers: a one-page executive summary for founders, a CVSS-scored technical findings section for engineers, and a prioritised remediation checklist. If your last report didn't have all three, it wasn't doing its job.
+
+## Next step
+
+If you want to see where your site stands today, run our free automated security health check — it covers TLS, security headers, and common misconfigurations, and lands in your inbox as a branded report.
