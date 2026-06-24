@@ -55,23 +55,32 @@ export function ButtonLink({
   size,
   className,
   children,
+  cursor,
 }: StyleProps & {
   href: string;
   external?: boolean;
   children: React.ReactNode;
+  /** Optional custom-cursor label shown on hover. */
+  cursor?: string;
 }) {
   const classes = buttonClasses({ variant, size, className });
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes}
+        data-cursor={cursor}
+      >
         {children}
       </a>
     );
   }
 
   return (
-    <Link href={href} className={classes}>
+    <Link href={href} className={classes} data-cursor={cursor}>
       {children}
     </Link>
   );

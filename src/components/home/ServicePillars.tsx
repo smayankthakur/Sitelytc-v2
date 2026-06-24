@@ -43,6 +43,7 @@ export function ServicePillars() {
           <Link
             key={p.title}
             href={p.href}
+            data-cursor="Explore"
             className="group card-lift ring-glow flex flex-col rounded-2xl border border-white/10 bg-surface p-8 hover:border-gold-500/30"
           >
             <div className="flex items-center justify-between">

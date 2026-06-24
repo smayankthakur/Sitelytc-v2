@@ -9,6 +9,7 @@ import { ScrollProgress } from "@/components/fx/ScrollProgress";
 import { SmoothScroll } from "@/components/fx/SmoothScroll";
 import { PageLoader } from "@/components/fx/PageLoader";
 import { CustomCursor } from "@/components/fx/CustomCursor";
+import { EasterEgg } from "@/components/fx/EasterEgg";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -76,17 +77,22 @@ export default async function RootLayout({
 
         {/* Intro loader (only visible when JS is present; fades out via PageLoader) */}
         <div id="page-loader">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/favicon.png"
-            alt="Sitelytc"
-            width={84}
-            height={84}
-            className="h-20 w-20 animate-float drop-shadow-[0_8px_30px_rgba(224,168,46,0.35)]"
-          />
-          <div className="page-loader-bar">
-            <span />
+          <div className="page-loader-grid" aria-hidden />
+          <div className="page-loader-inner">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/favicon.png"
+              alt="Sitelytc"
+              width={80}
+              height={80}
+              className="page-loader-logo"
+            />
+            <p className="page-loader-tag">Precision Digital Architecture</p>
+            <div className="page-loader-bar">
+              <span />
+            </div>
           </div>
+          <span id="page-loader-count" className="page-loader-count">00</span>
         </div>
         {/* Ambient page backdrop */}
         <div
@@ -112,6 +118,7 @@ export default async function RootLayout({
         {children}
         <PageLoader />
         <CustomCursor />
+        <EasterEgg />
         <SmoothScroll
           enabled={process.env.NEXT_PUBLIC_SMOOTH_SCROLL === "true"}
           nonce={nonce}

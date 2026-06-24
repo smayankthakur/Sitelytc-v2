@@ -2,13 +2,19 @@
 
 import { useEffect, useRef } from "react";
 
-/** Additive cursor ring (desktop/fine-pointer, motion-safe). Native cursor stays. */
+/**
+ * Contextual cursor: a gold ring that follows the pointer, grows over any
+ * interactive element, and becomes a labelled pill over elements carrying a
+ * `data-cursor="…"` attribute. Desktop / fine-pointer + motion-safe only.
+ */
 export function CustomCursor() {
   const ref = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    const label = labelRef.current;
+    if (!el || !label) return;
     if (!window.matchMedia("(pointer: fine)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -25,9 +31,22 @@ export function CustomCursor() {
     };
     const onOver = (e: Event) => {
       const t = e.target as HTMLElement | null;
-      const interactive = t?.closest("a, button, [role=button], input, textarea, select, label");
-      el.style.scale = interactive ? "1.9" : "1";
-      el.style.backgroundColor = interactive ? "rgba(239,190,82,0.12)" : "transparent";
+      const node = t?.closest<HTMLElement>(
+        "[data-cursor], a, button, [role=button], input, textarea, select, label",
+      );
+      if (!node) {
+        el.classList.remove("is-active", "is-label");
+        return;
+      }
+      const text = node.getAttribute("data-cursor");
+      if (text) {
+        label.textContent = text;
+        el.classList.add("is-label");
+        el.classList.remove("is-active");
+      } else {
+        el.classList.add("is-active");
+        el.classList.remove("is-label");
+      }
     };
     const loop = () => {
       x += (tx - x) * 0.2;
@@ -46,5 +65,9 @@ export function CustomCursor() {
     };
   }, []);
 
-  return <div ref={ref} aria-hidden className="custom-cursor" style={{ opacity: 0 }} />;
+  return (
+    <div ref={ref} aria-hidden className="custom-cursor" style={{ opacity: 0 }}>
+      <span ref={labelRef} className="custom-cursor-label" />
+    </div>
+  );
 }

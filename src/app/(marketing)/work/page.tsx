@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
-import { WorkList } from "@/components/work/WorkList";
-import { caseStudies } from "@/lib/work-data";
+import { ImmersiveCaseStudies } from "@/components/work/ImmersiveCaseStudies";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -31,7 +30,7 @@ export default function WorkPage() {
 
       <section className="reveal py-16 sm:py-20">
         <Container>
-          <WorkList items={caseStudies} />
+          <ImmersiveCaseStudies />
         </Container>
       </section>
     </>

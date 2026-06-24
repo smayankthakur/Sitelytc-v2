@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-/** Fades out the server-rendered #page-loader once per tab session. */
+/** Runs the intro once per tab: animates the 0→100 counter, then fades out. */
 export function PageLoader() {
   useEffect(() => {
     const el = document.getElementById("page-loader");
@@ -14,13 +14,23 @@ export function PageLoader() {
     } catch {
       seen = false;
     }
-
     if (seen) {
       el.style.display = "none";
       return;
     }
 
-    const t = window.setTimeout(() => {
+    const count = document.getElementById("page-loader-count");
+    const start = performance.now();
+    const duration = 950;
+    let raf = 0;
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / duration);
+      if (count) count.textContent = String(Math.round(p * 100)).padStart(2, "0");
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    const out = window.setTimeout(() => {
       el.classList.add("is-out");
       try {
         sessionStorage.setItem("sl_intro", "1");
@@ -30,9 +40,12 @@ export function PageLoader() {
       window.setTimeout(() => {
         el.style.display = "none";
       }, 650);
-    }, 1000);
+    }, 1050);
 
-    return () => window.clearTimeout(t);
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      window.clearTimeout(out);
+    };
   }, []);
 
   return null;

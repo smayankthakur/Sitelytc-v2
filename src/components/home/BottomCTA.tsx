@@ -22,13 +22,14 @@ export function BottomCTA() {
           a clear proposal within 48 hours.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href={site.calendly} external size="lg">
+          <ButtonLink href={site.calendly} external size="lg" cursor="Book">
             Book a Call
             <ArrowRight className="h-4 w-4" />
           </ButtonLink>
           <ButtonLink
             href="/contact"
             size="lg"
+            cursor="Write"
             className="bg-white/10 text-white ring-1 ring-inset ring-white/20 hover:bg-white/15"
           >
             Send a Brief

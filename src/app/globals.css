@@ -389,12 +389,33 @@ html.lenis body { height: auto; }
 /* ── Custom cursor (additive ring) ── */
 .custom-cursor {
   position: fixed; left: 0; top: 0; z-index: 70;
+  display: grid; place-items: center;
   height: 30px; width: 30px; margin: -15px 0 0 -15px;
   border: 1.5px solid rgba(239, 190, 82, 0.7);
   border-radius: 9999px; pointer-events: none;
-  transition: opacity 0.3s ease, scale 0.18s var(--ease-out-soft), background-color 0.18s ease;
+  transition:
+    width 0.22s var(--ease-out-soft), height 0.22s var(--ease-out-soft),
+    margin 0.22s var(--ease-out-soft), background-color 0.22s ease,
+    border-color 0.22s ease, opacity 0.3s ease;
   will-change: transform;
 }
+.custom-cursor.is-active {
+  width: 46px; height: 46px; margin: -23px 0 0 -23px;
+  background-color: rgba(239, 190, 82, 0.12);
+}
+.custom-cursor.is-label {
+  width: auto; height: 34px; padding: 0 15px; margin: -17px 0 0 -17px;
+  border-radius: 9999px;
+  background-color: var(--color-gold-400);
+  border-color: var(--color-gold-400);
+}
+.custom-cursor-label {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+  letter-spacing: 0.01em; color: #1a1306; white-space: nowrap;
+  opacity: 0; transform: scale(0.8);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.custom-cursor.is-label .custom-cursor-label { opacity: 1; transform: none; }
 
 /* ── Page loader (intro) ── shown only when JS is present (.js set pre-paint) ── */
 #page-loader { display: none; }
@@ -431,4 +452,88 @@ html.lenis body { height: auto; }
   .js .route-enter { animation: none; }
   .js .split-word-inner { transform: none; transition: none; }
   .page-loader-bar > span { animation: none; }
+}
+
+
+/* ── Concept preloader (blueprint construction) ── */
+.js #page-loader { gap: 0; }
+.page-loader-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(239, 190, 82, 0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 190, 82, 0.10) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 78%);
+  opacity: 0; transform: scale(1.06);
+  animation: blueprint-in 0.9s var(--ease-out-soft) forwards;
+}
+@keyframes blueprint-in { to { opacity: 1; transform: scale(1); } }
+.page-loader-inner {
+  position: relative; display: flex; flex-direction: column;
+  align-items: center; gap: 1.1rem;
+}
+.page-loader-logo {
+  height: 5rem; width: 5rem;
+  filter: drop-shadow(0 8px 30px rgba(239, 190, 82, 0.35));
+  animation: float 7s ease-in-out infinite;
+}
+.page-loader-tag {
+  font-family: var(--font-sans); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-ink-400);
+}
+.page-loader-count {
+  position: absolute; bottom: 2rem; right: 2.2rem;
+  font-family: var(--font-display); font-size: 2.5rem; font-weight: 700;
+  color: var(--color-ink-700);
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-loader-grid { animation: none; opacity: 1; transform: none; }
+  .page-loader-logo { animation: none; }
+}
+
+
+/* ── Page-transition wipe (plays on client navigation, not first load) ── */
+.route-transition {
+  position: fixed; inset: 0; z-index: 75; pointer-events: none;
+  background: var(--color-canvas);
+  animation: route-up 0.75s var(--ease-out-soft) forwards;
+}
+.route-transition::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-400), transparent);
+}
+@keyframes route-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+/* ── Easter egg: Konami "blueprint mode" ── */
+.egg-grid {
+  position: fixed; inset: 0; z-index: 65; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(239, 190, 82, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 190, 82, 0.16) 1px, transparent 1px);
+  background-size: 38px 38px;
+  animation: egg-fade 4s ease forwards;
+}
+@keyframes egg-fade {
+  0% { opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; }
+}
+.egg-toast {
+  position: fixed; bottom: 2rem; left: 50%; z-index: 66;
+  padding: 0.6rem 1.15rem; border-radius: 9999px;
+  background: var(--color-gold-400); color: #1a1306;
+  font-weight: 700; font-size: 0.85rem;
+  box-shadow: 0 12px 32px -8px rgba(224, 168, 46, 0.6);
+  animation: egg-toast 4s var(--ease-out-soft) forwards;
+}
+@keyframes egg-toast {
+  0% { opacity: 0; transform: translate(-50%, 12px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  85% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 12px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-transition { display: none; }
 }

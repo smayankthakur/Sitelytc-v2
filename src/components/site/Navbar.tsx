@@ -14,7 +14,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-canvas/70 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center" aria-label="Sitelytc home">
+        <Link href="/" className="flex items-center" aria-label="Sitelytc home" data-cursor="Home">
           <Image
             src="/logo.webp"
             alt="Sitelytc"
@@ -41,7 +41,7 @@ export function Navbar() {
           <ButtonLink href="/contact" variant="ghost" size="sm">
             Contact
           </ButtonLink>
-          <ButtonLink href={site.calendly} external size="sm">
+          <ButtonLink href={site.calendly} external size="sm" cursor="Book">
             Book a Call
           </ButtonLink>
         </div>

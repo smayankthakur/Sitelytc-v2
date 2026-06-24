@@ -2,23 +2,24 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Magnetic } from "@/components/fx/Magnetic";
-import { HeroSpotlight } from "@/components/fx/HeroSpotlight";
-import { HeroCanvas } from "@/components/fx/HeroCanvas";
+import { BlueprintHero } from "@/components/fx/BlueprintHero";
 import { RotatingWord } from "@/components/fx/RotatingWord";
 import { site } from "@/lib/site";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
-      {/* Subtle aurora — restrained, mostly monochrome */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="animate-gradient-drift absolute -left-1/4 top-[-25%] h-[44rem] w-[44rem] rounded-full bg-brand-600/15 blur-[140px]" />
-        <div className="animate-gradient-drift absolute right-[-15%] top-[10%] h-[30rem] w-[30rem] rounded-full bg-gold-500/10 blur-[130px] [animation-delay:-8s]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--color-canvas)_82%)]" />
-      </div>
-
-      <HeroCanvas />
-      <HeroSpotlight />
+      {/* Signature interactive WebGL blueprint backdrop */}
+      <BlueprintHero />
+      {/* Scrims keep the headline readable over the blueprint */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-canvas/80 via-canvas/35 to-transparent"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-canvas"
+      />
 
       <Container className="relative pb-28 pt-28 sm:pb-36 sm:pt-40">
         {/* Eyebrow */}
@@ -61,13 +62,13 @@ export function Hero() {
           >
             <div className="flex flex-wrap gap-3 lg:justify-end">
               <Magnetic>
-                <ButtonLink href={site.calendly} external size="lg">
+                <ButtonLink href={site.calendly} external size="lg" cursor={"Let\u2019s go"}>
                   Start a Project
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </ButtonLink>
               </Magnetic>
               <Magnetic>
-                <ButtonLink href="/work" size="lg" variant="secondary">
+                <ButtonLink href="/work" size="lg" variant="secondary" cursor="View">
                   See Our Work
                 </ButtonLink>
               </Magnetic>
